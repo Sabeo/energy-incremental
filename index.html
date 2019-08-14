@@ -1,0 +1,159 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Energy Incremental</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="top">
+
+        <div class="headText"> You have <span id="energy" class="energy">10</span> energy</div>
+        <div class="headText"> You are producing <span id="prodSec">0</span> energy per second</div>
+        <!-- <div class="time">Time is going <span id="time">1</span>x quicker than normal</div> -->
+
+    </div>
+
+    <div class="Prestige">
+
+        <button onclick="wattPrestige()" class="wattPrestige"> 
+            <span id="obtainableWatt" class="wattPrestige">Reset all generators for 0 Watts </span> 
+            <br> You currently have 
+            <span id="currentWatt" class="current wattPrestige">0</span> 
+             Watts</button>
+
+        <button onclick="joulePrestige()" class="joulePrestige" id="joulePrestige" hidden> 
+            <span id="obtainableJoule" class="joulePrestige">Get 135 Watts for a Joule</span> 
+            <br> You currently have 
+            <span id="currentJoule" class="joulePrestige current">0</span>
+             Joules </button>
+
+        <button class="heatPrestige" id="heatPrestige" hidden>
+            You currently have <span id="currentHeat" class="heatPrestige current">0</span> Heats
+        </button>
+    </div>
+
+    <div id="generators" class="generators">
+
+        <div class="energyGen">
+            <div class="name">Generator</div>
+            <div class="mult">Multiplier</div>
+            <div class="amount">Amount</div>
+            <div class="level">Level</div>
+            <div class="cost"></div>
+        </div>
+        <div class="energyGen">
+            <div class="name">First energy generator</div>
+            <div id="multEGen0" class="mult">1.00</div>
+            <div id="amountEGen0" class="amount">0.00</div>
+            <div id="levelEGen0" class="level">0.00</div>
+            <button id="costEGen0" class="cost costButton" onclick="buyEnergyGenerator(0)"></button>
+        </div>
+        <div class="energyGen">
+            <div class="name">Second energy generator</div>
+            <div id="multEGen1" class="mult">1.00</div>
+            <div id="amountEGen1" class="amount">0.00</div>
+            <div id="levelEGen1" class="level">0.00</div>
+            <button id="costEGen1" class="cost costButton" onclick="buyEnergyGenerator(1)"></button>
+        </div>
+        <div class="energyGen">
+            <div class="name">Third energy generator</div>
+            <div id="multEGen2" class="mult">1.00</div>
+            <div id="amountEGen2" class="amount">0.00</div>
+            <div id="levelEGen2" class="level">0.00</div>
+            <button id="costEGen2" class="cost costButton" onclick="buyEnergyGenerator(2)"></button>
+        </div>
+        <div class="energyGen">
+            <div class="name">Forth energy generator</div>
+            <div id="multEGen3" class="mult">1.00</div>
+            <div id="amountEGen3" class="amount">0.00</div>
+            <div id="levelEGen3" class="level">0.00</div>
+            <button id="costEGen3" class="cost costButton" onclick="buyEnergyGenerator(3)"></button>
+        </div>
+        <div class="energyGen">
+            <div class="name">Fifth energy generator</div>
+            <div id="multEGen4" class="mult">1.00</div>
+            <div id="amountEGen4" class="amount">0.00</div>
+            <div id="levelEGen4" class="level">0.00</div>
+            <button id="costEGen4" class="cost costButton" onclick="buyEnergyGenerator(4)"></button>
+        </div>
+
+    </div>
+
+    <div id="temperatureFields" hidden>
+
+        <div class="fields">
+            <div class="field">
+                <div class="name">First Generator Field</div>
+                <div class="mult">Current multiplier : <span id="fieldMult0">0.00</span>x</div>
+                <div class="level">Lvl : <span id="fieldLvl0">1.00</span></div>
+                <button class="button" id="fieldCost0" onclick="buyTemperatureField(0)">Upgrade field for 1 heats</button>
+            </div>
+            <div class="field">
+                <div class="name">Second Generator Field</div>
+                <div class="mult">Current multiplier : <span id="fieldMult1">0.00</span>x</div>
+                <div class="level">Lvl : <span id="fieldLvl1">1.00</span></div>
+                <button class="button" id="fieldCost1" onclick="buyTemperatureField(1)">Upgrade field for 1 heats</button>
+            </div>
+            <div class="field">
+                <div class="name">Third Generator Field</div>
+                <div class="mult">Current multiplier : <span id="fieldMult2">0.00</span>x</div>
+                <div class="level">Lvl : <span id="fieldLvl2">1.00</span></div>
+                <button class="button" id="fieldCost2" onclick="buyTemperatureField(2)">Upgrade field for 1 heats</button>
+            </div>
+            <div class="field">
+                <div class="name">Fourth Generator Field</div>
+                <div class="mult">Current multiplier : <span id="fieldMult3">0.00</span>x</div>
+                <div class="level">Lvl : <span id="fieldLvl3">1.00</span></div>
+                <button class="button" id="fieldCost3" onclick="buyTemperatureField(3)">Upgrade field for 1 heats</button>
+            </div>
+            <div class="field">
+                <div class="name">Fifth Generator Field</div>
+                <div class="mult">Current multiplier : <span id="fieldMult4">0.00</span>x</div>
+                <div class="level">Lvl : <span id="fieldLvl4">1.00</span></div>
+                <button class="button" id="fieldCost4" onclick="buyTemperatureField(4)">Upgrade field for 1 heats</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab">
+        <div class="menu">
+            <button class="tab_option" onclick="hideEverything()">Option</button>
+            <button class="tab_generators" onclick="generatorsTab()">Generators</button>
+            <button class="tab_temperature" id="tab_temperature" onclick="temperatureTab()" hidden>Temperature</button>
+            <!-- <button class="tab_matter" onclick="">Mxxxxx</button>
+            <button class="tab_light" onclick="">Lxxxx</button> -->
+        </div>
+        <div id="submenu">
+            <div class="sub_temperature">
+                <button class="temperature_fields" onclick="temperatureFieldsTab()">Temperature Fields</button>
+                <button class=" " onclick=" ">xxxxxify</button>
+                <button class=" " onclick=" ">xxxxify</button>
+                <button class=" " onclick=" ">xxxify</button>
+            </div>
+            <!-- <div class="sub_light ">
+                <button class=" " onclick=" "></button>
+                <button class=" " onclick=" "></button>
+                <button class=" " onclick=" "></button>
+                <button class=" " onclick=" "></button>
+            </div> -->
+        </div>
+    </div>
+
+</body>
+
+
+<script src="js/break_eternity.js "></script>
+<script src="js/generators.js "></script>
+<script src="js/clickEvents.js "></script>
+<script src="js/display.js "></script>
+<script src="js/keyboard.js "></script>
+<script src="js/reset.js "></script>
+<script src="js/currencyCalculation.js "></script>
+<script src="js/temperature.js "></script>
+<script src="js/main.js "></script>
+
+</html>
