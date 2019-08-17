@@ -14,6 +14,7 @@
         <div class="headText"> You have <span id="energy" class="energy">10</span> energy</div>
         <div class="headText"> You are producing <span id="prodSec">0</span> energy per second</div>
         <!-- <div class="time">Time is going <span id="time">1</span>x quicker than normal</div> -->
+        <div class="headText">The universe unstability is <span id="stability">1.00</span>%</div>
 
     </div>
 
@@ -37,6 +38,12 @@
     </div>
 
     <div id="generators" class="generators">
+
+        <div class="explanation">
+            <p>Each <span class="generator">Generator</span> produces the <span class="generator">Generator</span> below appart from first <span class="generator">Generator</span> which produces <span class="generator">Energy</span></p>
+            <p><span class="watt">Watts</span> increase the multiplier of the <span class="generator">Generators</span> from 1.01 to 1.06. You can reset for a new <span class="watt">Watt</span>, every new level of <span class="generator">Generators</span></p>
+            <p id="jouleExplanation" hidden><span class="joule">Joules</span> power the multiplier of your <span class="generator">Generators</span> even more, but cap when reaching a certain value. The first <span class="joule">Joules</span> just require 1 more <span class="watt">Watt</span>                then it is 10</p>
+        </div>
 
         <div class="energyGen">
             <div class="name">Generator</div>
@@ -67,7 +74,7 @@
             <button id="costEGen2" class="cost costButton" onclick="buyEnergyGenerator(2)"></button>
         </div>
         <div class="energyGen">
-            <div class="name">Fourth energy generator</div>
+            <div class="name">Forth energy generator</div>
             <div id="multEGen3" class="mult">1.00</div>
             <div id="amountEGen3" class="amount">0.00</div>
             <div id="levelEGen3" class="level">0.00</div>
@@ -84,6 +91,11 @@
     </div>
 
     <div id="temperatureFields" hidden>
+
+        <div class="explanation">
+            <p><span class="temperatureField">Temperature Fields</span> gradually increase the multiplier of your <span class="generator">Generators</span>. Upgrading a <span class="temperatureField">Temperature Field</span> will make the multiplier grow
+                faster and cap on an higher value</p>
+        </div>
 
         <div class="fields">
             <div class="field">
@@ -119,13 +131,20 @@
         </div>
     </div>
 
+    <div id="changelog" hidden>
+        <h3>version vα.1</h3>
+        <p>- Game uploaded with 3 features : Watts, Joules & Fields</p>
+        <h3>version vα.2</h3>
+        <p>- Fixed loading issue<br> - Added explanations on functionalities<br> - Added changelog<br> - Added Stability<br>- Changed Joules obtention</p>
+    </div>
+
     <div class="tab">
         <div class="menu">
-            <button class="tab_option" onclick="changelogTab()">Changelog</button>
+            <button class="tab_changelog" onclick="changelogTab()">Changelog</button>
             <button class="tab_generators" onclick="generatorsTab()">Generators</button>
             <button class="tab_temperature" id="tab_temperature" onclick="temperatureTab()" hidden>Temperature</button>
-            <!-- <button class="tab_xxxxxx" onclick="">Mxxxxx</button>
-            <button class="tab_xxxxx" onclick="">Lxxxx</button> -->
+            <!-- <button class="tab_matter" onclick="">Mxxxxx</button>
+            <button class="tab_light" onclick="">Lxxxx</button> -->
         </div>
         <div id="submenu">
             <div class="sub_temperature">
@@ -134,7 +153,7 @@
                 <button class=" " onclick=" ">xxxxify</button>
                 <button class=" " onclick=" ">xxxify</button>
             </div>
-            <!-- <div class="sub_xxxxx">
+            <!-- <div class="sub_light ">
                 <button class=" " onclick=" "></button>
                 <button class=" " onclick=" "></button>
                 <button class=" " onclick=" "></button>
@@ -144,7 +163,6 @@
     </div>
 
     <h3 class="version">Version vα.2</h3>
-
 </body>
 
 
