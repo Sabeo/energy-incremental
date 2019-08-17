@@ -96,9 +96,42 @@
 }
 
 
+/* ---------------------------Explanations--------------------------- */
+
+.explanation {
+    text-align: center;
+}
+
+.explanation p {
+    color: darksalmon;
+    font-size: 0.8em;
+}
+
+.explanation .generators {
+    color: white;
+}
+
+.explanation .watt {
+    color: goldenrod;
+}
+
+.explanation .joule {
+    color: blue;
+}
+
+.explanation .temperatureField {
+    color: purple;
+}
+
+.version {
+    text-align: center;
+    font-weight: bold;
+}
+
+
 /* ---------------------------Generators--------------------------- */
 
-.energyGen {
+.generators .energyGen {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -137,9 +170,10 @@
     border-radius: 7px;
 }
 
-.layed {
+
+/* .layed {
     background-color: grey;
-}
+} */
 
 
 /* ---------------------------Temperature--------------------------- */
@@ -148,7 +182,7 @@
 /* ---------------------------Fields--------------------------- */
 
 #temperatureFields {
-    font-size: 1.2em;
+    font-size: 1.4em;
 }
 
 .field {

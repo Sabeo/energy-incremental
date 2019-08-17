@@ -8,6 +8,7 @@ let player = {
     timeSpeed: new Decimal('1'),
     heat: new Decimal('0'),
     temperatureField: {},
+    forcedCap: 120,
 
     unlockedTemperature: false,
     unlockedJoule: false,
@@ -21,12 +22,15 @@ function updateEnergyAmounts(diff) {
         player.energyGenerator[i - 2].amount = Decimal.add(player.energyGenerator[i - 2].amount, Decimal.times(player.energyGenerator[i - 1].amount, Decimal.times(player.energyGenerator[i - 1].mult, Decimal.times(diff, player.timeSpeed))));
     }
     player.energy = Decimal.add(player.energy, Decimal.times(player.energyGenerator[0].amount, Decimal.times(player.energyGenerator[0].mult, Decimal.times(diff, player.timeSpeed))));
+
+
     let temperatureCap = new Decimal('1e240')
     if (Decimal.gte(player.energy, temperatureCap)) {
         if (!player.unlockedTemperature) {
             document.getElementById("tab_temperature").style.display = "block";
             document.getElementById("heatPrestige").style.display = "block";
-            unlockedTemperature = true;
+            player.unlockedTemperature = true;
+            player.forcedCap = 480;
         }
         player.heat = Decimal.add(player.heat, 1);
         displayHeat();
@@ -88,26 +92,27 @@ function loadSave() {
     }
     if (player.unlockedJoule) {
         document.getElementById("joulePrestige").style.display = "block";
+        document.getElementById("jouleExplanation").style.display = "block";
     }
 }
 
 //-------------------------- FORMAT --------------------------
 
-function format(variable, digits) {
+// function format(variable, digits) {
 
-    //Catch exponent
-    let exponent = Decimal.log(variable, 10);
+//     //Catch exponent
+//     let exponent = Decimal.log(variable, 10);
 
-    //approx = floor( variable / (exponent - digit)^10 )
-    let approx = Decimal.floor(Decimal.div(variable, Decimal.pow(Decimal.minus(exponent, digits), 10)));
+//     //approx = floor( variable / (exponent - digit)^10 )
+//     let approx = Decimal.floor(Decimal.div(variable, Decimal.pow(Decimal.minus(exponent, digits), 10)));
 
-    // firstPart = approx/10^digit-1
-    let firstPart = Decimal.div(approx, Decimal.pow(digits - 1), 10);
+//     // firstPart = approx/10^digit-1
+//     let firstPart = Decimal.div(approx, Decimal.pow(digits - 1), 10);
 
-    let final = String(approx + "e" + exponent);
+//     let final = String(approx + "e" + exponent);
 
-    return final;
-}
+//     return final;
+// }
 
 //-------------------------- LOOP & INIT --------------------------
 
@@ -116,6 +121,7 @@ function loop() {
     displayEnergyAmounts();
     updateEnergyAmounts(diff);
     displayWatt();
+    displayStability();
     lastUpdate = Date.now();
 }
 
@@ -124,17 +130,22 @@ function secondLoop() {
 }
 
 function init() {
+
+    //Creating generators
     player.energyGenerator = getEnergyGenerators();
     player.temperatureField = getTemperatureFields();
+
+    //Display
     displayEnergyGenerators();
+    displayJoule();
+    displayHeat();
 
     //Put the player on generator tab
-    hideEverything();
     generatorsTab();
 
     //Checking if a save already exist
     if (localStorage.getItem("energy-incremental-playerdata") != null) {
-        // loadSave();
+        loadSave();
     }
 }
 

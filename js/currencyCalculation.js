@@ -2,7 +2,7 @@
 
 const WATTMIN = 135
 const WATTSCALE = 10
-const WATTCAP = 5
+const WATTCAP = 3
 
 const WATTMULT = 1.2
 const WATTGENMULT = 0.1
@@ -49,4 +49,11 @@ function multiplierCalculation() {
         player.energyGenerator[i - 1].mult = Decimal.times(player.energyGenerator[i - 1].mult, player.temperatureField[i - 1].mult);
         player.energyGenerator[i - 1].mult = Decimal.times(player.energyGenerator[i - 1].mult, player.energyGenerator[i - 1].multBonus);
     }
+}
+
+function stabilityCalculation() {
+    let logE = Decimal.log(player.energy, 10);
+    let stabilityCoef = Decimal.div(logE, player.forcedCap);
+    let stabilityPercent = Decimal.times(stabilityCoef, 100);
+    return stabilityPercent;
 }

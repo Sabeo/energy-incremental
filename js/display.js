@@ -4,7 +4,7 @@ function displayEnergyGenerators() {
     for (let i = 0; i < 5; i++) {
         document.getElementById("multEGen" + i).textContent = player.energyGenerator[i].mult.toPrecision(3);
         document.getElementById("levelEGen" + i).textContent = player.energyGenerator[i].level.toPrecision(3);
-        document.getElementById("costEGen" + i).textContent = "cost : " + player.energyGenerator[i].cost //.toPrecision(1);
+        document.getElementById("costEGen" + i).textContent = "cost : " + player.energyGenerator[i].cost; //toPrecision(1);
     }
 }
 
@@ -57,6 +57,10 @@ function displayFieldMult() {
     }
 }
 
+function displayStability() {
+    document.getElementById("stability").textContent = stabilityCalculation().toPrecision(3);
+}
+
 //-------------------------- TAB DISPLAY --------------------------
 
 function hideEverything() {
@@ -64,6 +68,12 @@ function hideEverything() {
     document.getElementById("submenu").style.display = "none";
     //document.getElementById("sub_temperature").style.display = "none";
     document.getElementById("temperatureFields").style.display = "none";
+    document.getElementById("changelog").style.display = "none";
+}
+
+function changelogTab() {
+    hideEverything();
+    document.getElementById("changelog").style.display = "block";
 }
 
 function generatorsTab() {

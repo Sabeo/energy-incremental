@@ -30,7 +30,7 @@ function getNewTemperatureField(id, cost, mult, level) {
 }
 
 function temperatureFieldScaling(i) {
-    if (Decimal.gte(player.temperatureField[i].level, 4 - i)) {
+    if (Decimal.gte(player.temperatureField[i].level, 5 - i)) {
         player.temperatureField[i].cost = Decimal.add(player.temperatureField[i].cost, 1);
     }
 }

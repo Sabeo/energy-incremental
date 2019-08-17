@@ -27,8 +27,13 @@ function wattPrestige() {
     let wattGain = new Decimal(wattCalculation())
     if (Decimal.gte(wattGain, 0.5)) {
         player.watt = Decimal.add(player.watt, wattGain);
-        if (Decimal.gte(player.watt, 135)) {
-            document.getElementById("joulePrestige").style.display = "block";
+        if (!player.unlockedJoule) {
+            if (Decimal.gte(player.watt, 135)) {
+                document.getElementById("joulePrestige").style.display = "block";
+                document.getElementById("jouleExplanation").style.display = "block";
+                player.forcedCap = 240;
+                player.unlockedJoule = true;
+            }
         }
         multiplierCalculation();
         wattReset();
@@ -38,9 +43,15 @@ function wattPrestige() {
 function joulePrestige() {
     if (Decimal.gte(player.watt, WATTMIN)) {
         player.joule = Decimal.add(player.joule, jouleCalculation());
+
+        let exponent = Decimal.times(player.joule, 0.12);
         for (let i = 0; i < 5; i++) {
-            player.energyGenerator[i].multBonus = Decimal.pow(JOULEMULT, player.joule);
+            player.energyGenerator[i].multBonus = Decimal.pow(10, exponent);
+            if (Decimal.gte(2, player.energyGenerator[i].multBonus)) {
+                player.energyGenerator[i].multBonus = 2;
+            }
         }
+
         multiplierCalculation();
         jouleReset();
     }
